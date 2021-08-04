@@ -9,6 +9,6 @@ namespace CheckForklift.Interfaces.Repositories
     {
         Dispositivos AdicionarDispositivo(Dispositivos Dispo);
 
-        Dispositivos AutenticaDispositivo(Dispositivos Dispo);
+        Dispositivos RetornaDispositivoByImei(Dispositivos Dispo);
     }
 }

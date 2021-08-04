@@ -1,5 +1,6 @@
 ﻿using CheckForklift.Arguments.Dispositivos;
 using CheckForklift.Entities;
+using CheckForklift.Enum;
 using CheckForklift.Interfaces.Repositories;
 using CheckForklift.Interfaces.Services;
 using prmToolkit.NotificationPattern;
@@ -18,8 +19,7 @@ namespace CheckForklift.Services
 
         public AdicionarDispositivoResponse AdicionarDispositivo(AdicionarDispositivoRequest request)
         {
-            Dispositivos dipAux = new Dispositivos(usuario: new Usuarios(user: request.User),
-                                                                                   imei: request.Imei, 
+            Dispositivos dipAux = new Dispositivos(imei: request.Imei, 
                                                                                    modelo: request.modelo, 
                                                                                    descricao: request.modelo) ;
 
@@ -32,16 +32,10 @@ namespace CheckForklift.Services
         {
             var dispositivo = new Dispositivos(imei: request.Imei);
 
-            /*AddNotifications(dispositivo);
-            
-            if (dispositivo.IsInvalid())
-            {
-                return null;
-            }*/
+            dispositivo = _repositoryDispositivos.RetornaDispositivoByImei(dispositivo);
 
-            dispositivo =  _repositoryDispositivos.AutenticaDispositivo(dispositivo);
+           return (AutenticarDispositivoResponse)dispositivo;
 
-            return (AutenticarDispositivoResponse)dispositivo;
         }
     }
 }

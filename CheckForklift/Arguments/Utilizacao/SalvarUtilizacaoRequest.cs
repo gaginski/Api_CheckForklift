@@ -4,7 +4,7 @@ namespace CheckForklift.Arguments.Utilizacao
 {
     public class SalvarUtilizacaoRequest
     {
-        public long Imei { get; set; }
+        public string Imei { get; set; }
         public int IdUtilizacao { get; set; }
         public int IdVeiculo { get; set; }
         public string User { get; set; }

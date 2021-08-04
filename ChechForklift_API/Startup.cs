@@ -72,8 +72,9 @@ namespace CheckForklift.Api
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { category = "all" }
+               defaults: new { id = RouteParameter.Optional }
             );
+
         }
 
         public void ConfigureOAuth(IAppBuilder app, UnityContainer container)

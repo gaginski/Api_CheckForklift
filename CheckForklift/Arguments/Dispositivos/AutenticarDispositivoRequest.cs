@@ -4,6 +4,6 @@ namespace CheckForklift.Arguments.Dispositivos
 {
     public class AutenticarDispositivoRequest : IRequest
     {
-        public long Imei { get; set; }
+        public string Imei { get; set; }
     }
 }

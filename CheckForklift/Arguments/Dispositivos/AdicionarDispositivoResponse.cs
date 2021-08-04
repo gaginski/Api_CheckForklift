@@ -7,7 +7,7 @@ namespace CheckForklift.Arguments.Dispositivos
     public class AdicionarDispositivoResponse : IResponse
     {
         public int Id { get; set; }
-        public Int64 Imei { get; set; }
+        public string Imei { get; set; }
         public string Msg { get; set; }
 
         public static explicit operator AdicionarDispositivoResponse(Entities.Dispositivos v)

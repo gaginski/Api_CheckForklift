@@ -13,8 +13,6 @@ namespace CheckForklift.Entities
         {
             User = user;
 
-            /*new AddNotifications<Usuarios>(this)
-              .IfNullOrEmpty(x => x.User , string.Format(Resource.X0_Invalido, "User"));*/
         }
 
         public Usuarios(string user, string senha)
@@ -22,19 +20,14 @@ namespace CheckForklift.Entities
             User = user;
             Senha = senha;
 
-         /*   new AddNotifications<Usuarios>(this)
-              .IfNullOrEmpty(x => x.User, string.Format(Resource.X0_Invalido, "User"))
-              .IfNullOrEmpty(x => x.Senha, string.Format(Resource.X0_Invalido, "Senha"));*/
-
             Senha = Senha.ConvertToMD5();
-
         }
 
         public Usuarios()
         {
 
         }
-        [OpcoesBase(UsarNoBanco =true, UsarParaBuscar =true, ChavePrimaria =true)]
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true, ChavePrimaria = true)]
         public int id { get; set; }
 
 
@@ -45,6 +38,6 @@ namespace CheckForklift.Entities
         public string User { get; set; }
 
         [OpcoesBase(UsarNoBanco = true)]
-        public string Senha { get;set; }
+        public string Senha { get; set; }
     }
 }

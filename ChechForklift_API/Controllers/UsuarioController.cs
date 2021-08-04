@@ -6,9 +6,11 @@ using CheckForklift_Infra.Persistence.Repositories;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using CheckForklift.Api.Security;
 
 namespace ChechForklift_API.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/usuario")]
     public class UsuarioController : ControllerBase
     {

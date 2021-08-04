@@ -3,6 +3,7 @@ using CheckForklift.Enum;
 using CheckForklift.Resources;
 using prmToolkit.NotificationPattern;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VgsOrm.DataBase;
 
@@ -10,36 +11,100 @@ namespace CheckForklift.Entities
 {
     public class Dispositivos : EntityBase
     {
-        public Dispositivos(Usuarios usuario, Int64 imei, string modelo, string descricao) 
+        public Dispositivos( string imei, string modelo, string descricao) 
         {
-            Usuario = usuario;
+            validaNewDispositivo( imei, modelo);
+
             Imei = imei;
             Modelo = modelo;
             Descricao = descricao;
 
-            /*new AddNotifications(this)
-                .IfNullOrInvalidLength(x => x.Imei.ToString(), 13, 13, string.Format(Resource.X0_Invalido, "Imei"))
-                .IfNullOrInvalidLength(x => x.Descricao, 5, 100, string.Format(Resource.X0_Invalido, "Descricao"))
-                .IfNullOrEmpty(x => x.Modelo, string.Format(Resource.X0_Invalido, "Modelo"))
-                .IfNullOrEmpty(x => x.Usuario.User, string.Format(Resource.X0_Invalido, "User"));*/
         }
-        public Dispositivos(long imei)
+
+        private bool validaNewDispositivo(string imei, string modelo)
+        {
+            List<String> msgException = new List<string>();
+
+            if(string.IsNullOrWhiteSpace(imei) || imei.Length != 15)
+                msgException.Add("Imei inválido");
+
+            if (string.IsNullOrWhiteSpace(modelo))
+                msgException.Add("Modelo inválido");
+
+            if(msgException.Count > 0)
+                throw new Exception(string.Format(Resources.Resource.SolicitacaoIncorreta, string.Join(", ", msgException.ToArray())));
+
+            return true;
+        }
+
+        private bool validaDispositivoExistente(string imei)
+        {
+            List<String> msgException = new List<string>();
+
+           
+            if (string.IsNullOrWhiteSpace(imei) || imei.Length != 15)
+                msgException.Add("Imei inválido");
+
+            if (msgException.Count > 0)
+                throw new Exception(string.Format(Resources.Resource.SolicitacaoIncorreta, string.Join(", ", msgException.ToArray())));
+
+            return true;
+        }
+        public Dispositivos(string imei)
         {
             Imei = imei;
-            /*
-            new AddNotifications<Dispositivos>(this)
-            .IfNullOrInvalidLength(x => x.Imei.ToString(), 13, 13, string.Format(Resource.X0_Invalido, "Imei"));*/
+
         }
-        [OpcoesBase()]
+
+        public Dispositivos()
+        {
+            Id = 0;
+            Usuario_id = 0;
+            Imei = null;
+            Modelo = null;
+            Descricao = null;
+            DataCadastro = DateTime.Now;
+            DataAceite = DateTime.Now;
+            UsuarioAceite_id = 0;
+            DataUltimaSincronizacao = DateTime.MinValue;
+            Situacao = 0;
+        }
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true, ChavePrimaria =true, AutoIncremento =true)]
         public int Id { get; private set; }
-        public Usuarios Usuario { get; private set; }
-        public Int64 Imei { get; private set; }
+
+        public int Usuario_id { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
+        public string Imei { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
         public string Modelo { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
         public string Descricao { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
         public DateTime DataCadastro { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
         public DateTime DataAceite { get; private set; }
-        public Usuarios UsuarioAceite { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
+        public int UsuarioAceite_id { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
         public DateTime DataUltimaSincronizacao { get; private set; }
+
+
+        [OpcoesBase(UsarNoBanco = true, UsarParaBuscar = true)]
         public TSituacaoDispositivo Situacao { get; private set; }
     }
 }

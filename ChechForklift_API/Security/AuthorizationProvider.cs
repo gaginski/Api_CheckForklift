@@ -32,6 +32,7 @@ namespace CheckForklift.Api.Security
             try
             {
                 IServiceUsuarios serviceUsuario = _container.Resolve<IServiceUsuarios>();
+                IServicesDispositivos servicesDispositivo = _container.Resolve<IServicesDispositivos>();
 
 
                 AutenticaUsuarioRequest request = new AutenticaUsuarioRequest();
@@ -39,15 +40,6 @@ namespace CheckForklift.Api.Security
                 request.Senha = context.Password;
 
                 AutenticaUsuarioResponse response = serviceUsuario.Autenticar(request);
-
-                if (serviceUsuario.IsInvalid())
-                {
-                    if (response == null)
-                    {
-                        context.SetError("invalid_grant", "Preencha um e-mail válido e uma senha com pelo menos 6 caracteres.");
-                        return;
-                    }
-                }
 
                 serviceUsuario.ClearNotifications();
 
@@ -59,7 +51,6 @@ namespace CheckForklift.Api.Security
 
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-                //Definindo as Claims
                 identity.AddClaim(new Claim("Usuarios", JsonConvert.SerializeObject(response)));
 
                 var principal = new GenericPrincipal(identity, new string[] { });

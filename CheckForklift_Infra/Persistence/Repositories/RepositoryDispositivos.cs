@@ -10,13 +10,18 @@ namespace CheckForklift_Infra.Persistence.Repositories
     {
         public Dispositivos AdicionarDispositivo(Dispositivos Dispo)
         {
-        
+            Dispo.Salvar<Dispositivos>();
+
             return Dispo;
         }
 
-        public Dispositivos AutenticaDispositivo(Dispositivos Dispo)
+        public Dispositivos RetornaDispositivoByImei(Dispositivos Dispo)
         {
-            
+            var v = Dispo.Busca<Dispositivos>();
+
+            if (v.Count > 0)
+                return v[0];
+
             return null;
         }
 

@@ -23,8 +23,8 @@ namespace CheckForklift.Services
         public AutenticaUsuarioResponse Autenticar(AutenticaUsuarioRequest request)
         {
             var usuarioAux = new Usuarios(user: request.User, senha: request.Senha);
-            Usuarios u  = _repositoryUsuario.ReturnUsuarioByUser(usuarioAux);
-            
+            Usuarios u = _repositoryUsuario.ReturnUsuarioByUser(usuarioAux);
+
             if (u != null && usuarioAux.Senha == u.Senha.ConvertToMD5())
                 return (AutenticaUsuarioResponse)u;
 
@@ -32,16 +32,5 @@ namespace CheckForklift.Services
             return (AutenticaUsuarioResponse)new Usuarios();
         }
 
-        private Tipe setProperty<Tipe>(Tipe obj, object ibase)
-        {
-
-            foreach (PropertyInfo pi in obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                OpcoesBase pOpcoesBase = (OpcoesBase)pi.GetCustomAttribute(typeof(OpcoesBase));
-                if (pOpcoesBase == null || (pOpcoesBase.UsarNoBanco && !pOpcoesBase.UsarParaBuscar))
-                    obj.GetType().GetProperty(pi.Name).SetValue(obj, ibase.GetType().GetProperty(pi.Name).GetValue(ibase));
-            }
-            return obj;
-        }
     }
 }

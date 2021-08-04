@@ -70,6 +70,15 @@ namespace CheckForklift.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Solicitação Incorreta: {0}.
+        /// </summary>
+        internal static string SolicitacaoIncorreta {
+            get {
+                return ResourceManager.GetString("SolicitacaoIncorreta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a {0} Invalido!.
         /// </summary>
         internal static string X0_Invalido {

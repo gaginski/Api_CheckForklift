@@ -7,6 +7,13 @@
         Excluido
     }
 
+    public enum TStatusToken
+    {
+        Ativo,
+        Inativo,
+        Vencido
+    }
+
     public enum TSituacaoVeiculo
     {
         Uso,

@@ -21,7 +21,8 @@ namespace CheckForklift.Api.Controllers.Base
             {
                 try
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, result);
+                    var aux = Request.CreateResponse(HttpStatusCode.OK, result);
+                    return aux;
                 }
                 catch (Exception ex)
                 {
@@ -41,7 +42,6 @@ namespace CheckForklift.Api.Controllers.Base
 
         protected override void Dispose(bool disposing)
         {
-            //Realiza o dispose no serviço para que possa ser zerada as notificações
             if (_serviceBase != null)
             {
                 _serviceBase.Dispose();

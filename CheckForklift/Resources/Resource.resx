@@ -120,6 +120,9 @@
   <data name="Operacao_realizada_com_sucesso" xml:space="preserve">
     <value>Operacao realizada com sucesso!</value>
   </data>
+  <data name="SolicitacaoIncorreta" xml:space="preserve">
+    <value>Solicitação Incorreta: {0}</value>
+  </data>
   <data name="X0_Invalido" xml:space="preserve">
     <value>{0} Invalido!</value>
   </data>
